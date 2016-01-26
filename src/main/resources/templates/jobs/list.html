@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="page-header">Job</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+ 				<a class="btn btn-primary" th:href="@{/job/create}"><span class="glyphicon glyphicon-plus"></span>Add</a> 
+					<button type="button" class="btn btn-warning"
+						onclick="Job.List.edit()"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+<!-- 					<button type="button" class="btn btn-danger" -->
+<!-- 						onclick="User.List.remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button> -->
+<!-- 					<button type="button" class="btn btn-primary" -->
+<!-- 						onclick="User.List.assignWFGroup()">Assign Workflow Group</button> -->
+					<div class="table-responsive">
+						<div id="job-list-table-container">
+							<table id="job-list-table"
+								class="my_table_1 table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>_id</th>
+										<th>Title</th>
+										<th>CreatedOn</th>
+										<th>CreatedBy</th>
+										<th>JobType</th>
+										<th>Active</th>
+										<th>ExecutedOn</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="jobs : ${joblist}">
+										<td th:text="${jobs?.getId()}"></td>
+										<td th:text="${jobs?.getTitle()}"></td>
+										<td th:text="${jobs?.getCreatedOn()}"></td>
+										<td th:text="${jobs?.getCreatedBy()}"></td>
+										<td th:text="${jobs?.getJobType()}"></td>
+										<td th:text="${jobs?.isActive()}"></td>
+										<td th:text="${jobs?.getLastExecutedOn()}"></td>
+										<td th:text="${jobs?.isLastExecutionStatus()}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/job.js}"></script>
+		<script th:inline="javascript">
+			$(document).ready(
+					function() {
+						/*<![CDATA[*/
+						var msg = /*[[${message}]]*/null;
+						if (msg) {
+							SiteMAN.showNotification(msg,
+									SiteMAN.NotificationType.success);
+						}
+						/*]]>*/
+						Job.List.init();
+					});
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="page-header">Privilege Mask</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<a class="btn btn-primary" th:href="@{/privilegemask/create}"><span class="glyphicon glyphicon-plus"></span> Add</a>
+					<button type="button" class="btn btn-warning"
+						onclick="PrivilegeMask.List.edit()"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+					<button type="button" class="btn btn-danger"
+						onclick="PrivilegeMask.List.remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+					<div class="table-responsive">
+						<div id="privilegemask-list-table-container">
+							<table id="privilegemask-list-table"
+								class="my_table_1 table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>_id</th>
+										<th>Privilege Name</th>
+										<th>Object Code</th>
+										<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="privilegeMask : ${privilegeMaskList}">
+										<td th:text="${privilegeMask?.getId()}"></td>
+										<td th:text="${privilegeMask?.getName()}"></td>
+										<td th:text="${privilegeMask?.getObjectCode()}"></td>
+										<td th:text="${privilegeMask?.getDescription()}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/privilegeMask.js}"></script>
+		<script th:inline="javascript">
+			$(document).ready(
+					function() {
+						/*<![CDATA[*/
+						var msg = /*[[${message}]]*/null;
+						if (msg) {
+							SiteMAN.showNotification(msg,
+									SiteMAN.NotificationType.success);
+						}
+						/*]]>*/
+						PrivilegeMask.List.init();
+					});
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+<div layout:fragment="main-content">
+		<div id="page-wrapper">
+<div id="form" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="page-header">Contact</h2>
+						</div>
+						<!-- /.col-md-12 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-12">
+							<form method="post" th:action="@{/contact/save}"
+								th:object="${contact}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Name<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{name}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Email<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{Email}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>PhoneNo<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{PhoneNo}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Address<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{Address}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+<!-- 								<button type="submit" class="btn btn-primary" >Submit</button> -->
+								<!-- /.row (nested) -->
+								</div>
+							</form>
+							<!-- /.panel-body -->
+						</div>
+					</div>
+					<!-- /.panel -->
+					<!-- /.col-md-12 -->
+					<!-- /.row -->
+
+				</div>
+									
+
+			</div>
+		</div>
+
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/contact.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				Contact.Create.init();
+			});
+		</script>
+	</div>					
+</body>
+</html>
+								
+			

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#form">Form</a></li>
+				<li><a data-toggle="tab" href="#whereused">Where Used</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="form" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="page-header">Role</h2>
+						</div>
+					</div>
+					<!-- /.row -->
+
+					<div class="row">
+						<div class="col-lg-12">
+							<form method="post" th:action="@{/role/save}" th:object="${role}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Name<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{name}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Code<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{objectCode}"
+													required="required" pattern="^\S+$" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Description<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<textarea class="form-control" rows="3"
+													th:field="*{description}" required="required"></textarea>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label class="control-label">Privilege Masks</label>
+											</div>
+											<div class="col-lg-8">
+												<select multiple="multiple" th:field="*{privilegeMasks}">
+													<option th:each="privilegeMask : ${privilegeMaskList}"
+														th:value="${privilegeMask?.getId()}"
+														th:text="${privilegeMask?.getObjectCode()}">Privilege
+														Mask</option>
+														
+												</select>
+												<button type="button" id="addprivilege" class="btn btn-info">
+													<span class="glyphicon glyphicon-plus"></span> Create
+													PrivilegeMask
+												</button>
+												
+											</div>
+										</div>
+									</div>
+								<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+<!-- 									<button type="submit" class="btn btn-primary">Submit</button> -->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="whereused" class="tab-pane fade">
+
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="page-header">UserGroup</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<button type="button" class="btn btn-success"
+								onclick="Role.List.editUserGroup()">View</button>
+							<div class="table-responsive">
+								<div id="usergroup-list-table-container">
+									<table id="usergroup-list-table"
+										class="my_table_1 table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>_id</th>
+												<th>Name</th>
+												<th>Code</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="userGroup : ${userGroupList}">
+												<td th:text="${userGroup?.getId()}"></td>
+												<td th:text="${userGroup?.getName()}"></td>
+												<td th:text="${userGroup?.getObjectCode()}"></td>
+												<td th:text="${userGroup?.getDescription()}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/role.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				Role.Create.init();
+				Role.List.initUserGroup();
+			});
+		</script>
+	</div>
+</body>
+</html>

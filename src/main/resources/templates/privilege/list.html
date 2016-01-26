@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="page-header">Privilege</h2>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-lg-12">
+<!-- 					<a class="btn btn-primary" th:href="@{/privilege/create}">Add</a> -->
+<!-- 					<button type="button" class="btn btn-success" onclick="Privilege.List.edit()">Edit</button> -->
+					<div class="table-responsive">
+						<div id="privilege-list-table-container">
+							<table id="privilege-list-table"
+								class="my_table_1 table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>_id</th>
+										<th>Name</th>
+										<th>Code</th>
+										<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="privilege : ${privilegeList}">
+										<td th:text="${privilege?.getId()}"></td>
+										<td th:text="${privilege?.getName()}"></td>
+										<td th:text="${privilege?.getObjectCode()}"></td>
+										<td th:text="${privilege?.getDescription()}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/privilege.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				Privilege.List.init();
+			});
+		</script>
+	</div>
+</body>
+</html>

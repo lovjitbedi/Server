@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="page-header">UserGroup</h2>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-lg-12">
+					<a class="btn btn-primary" th:href="@{/usergroup/create}"><span class="glyphicon glyphicon-plus"></span> Add</a>
+					<button type="button" class="btn btn-warning" onclick="UserGroup.List.edit()"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+					<button type="button" class="btn btn-danger"
+						onclick="UserGroup.List.remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+					<div class="table-responsive">
+						<div id="usergroup-list-table-container">
+							<table id="usergroup-list-table"
+								class="my_table_1 table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>_id</th>
+										<th>Name</th>
+										<th>Code</th>
+										<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="userGroup : ${userGroupList}">
+										<td th:text="${userGroup?.getId()}"></td>
+										<td th:text="${userGroup?.getName()}"></td>
+										<td th:text="${userGroup?.getObjectCode()}"></td>
+										<td th:text="${userGroup?.getDescription()}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/userGroup.js}"></script>
+		<script th:inline="javascript">
+			$(document).ready(function() {
+				/*<![CDATA[*/
+				var msg = /*[[${message}]]*/null;
+				if(msg){
+					SiteMAN.showNotification(msg,
+						SiteMAN.NotificationType.success);
+				}
+			/*]]>*/
+				UserGroup.List.init();
+			});
+		</script>
+	</div>
+</body>
+</html>

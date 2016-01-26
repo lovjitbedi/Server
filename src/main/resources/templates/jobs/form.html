@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+
+<body>
+
+<div layout:fragment="main-content">
+		<div id="page-wrapper">
+		
+
+<!-- 			<div class="tab-content"> -->
+				<div id="form" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="page-header">Job</h2>
+						</div>
+						<!-- /.col-md-12 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-12">
+							<form method="post" th:action="@{/job/save}"
+								th:object="${job}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Title<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{title}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Description<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{description}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>cronExpression<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{cronExpression}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Active<ins class="required-field">*</ins>
+												</label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{active}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+								<div class="row">
+									
+										<div class="col-lg-4">
+												<label class="control-label">JobType<ins
+														class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<select required="required" th:field="*{jobType}">
+												<option value="ImportProjectSchedule">Import Project Schedule</option>
+<!-- 													<option th:each="privilege : ${privilegeList}" -->
+<!-- 														th:value="${privilege?.getId()}" -->
+<!-- 														th:text="${privilege?.getName()}">Privilege Name</option> -->
+												</select>
+												</div>
+												</div>
+										
+									</div>
+									
+									<div class="form-group">
+								<div class="row">
+									
+									<div class="col-lg-4"> 
+										<label class="control-label">ProjectList</label>
+									</div>
+									<div class="col-lg-8">
+										<select multiple="multiple" th:field="*{projectList}">
+											<option th:each="project : ${projectList}"
+												th:value="${project?.getId()}" th:text="${project?.getTitle()}">Project
+												List</option>		
+										</select>
+										
+									
+									
+								</div>
+							</div>
+									
+									
+									
+									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+<!-- 								<button type="submit" class="btn btn-primary" >Submit</button> -->
+								
+									<!-- /.row (nested) -->
+								</div>
+								</div>
+							</form>
+							
+							<!-- /.panel-body -->
+						</div>
+					</div>
+					<!-- /.panel -->
+					<!-- /.col-md-12 -->
+					<!-- /.row -->
+
+				</div>
+									
+
+			</div>
+		</div>
+
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/job.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				Job.Create.init();
+			});
+		</script>
+	</div>					
+</body>
+</html>
+								
+			

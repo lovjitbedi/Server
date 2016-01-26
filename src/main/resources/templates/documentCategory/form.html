@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="page-header">Document Category</h2>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+
+			<div class="row">
+				<div class="col-lg-12">
+					<form method="post" th:action="@{/docCategory/save}"
+						th:object="${documentCategory}">
+						<input type="hidden" th:field="*{id}" />
+						<div class="col-lg-6">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-lg-4">
+										<label>Name<ins class="required-field">*</ins></label>
+									</div>
+									<div class="col-lg-8">
+										<input class="form-control" th:field="*{name}"
+											required="required" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col-lg-4">
+										<label>Object Code<ins class="required-field">*</ins></label>
+									</div>
+									<div class="col-lg-8">
+										<input class="form-control"
+											th:readonly="${documentCategory.getObjectCode()!=null}"
+											th:field="*{objectCode}" required="required" pattern="^\S+$" />
+									</div>
+								</div>
+							</div>
+								<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+<!-- 							<button type="submit" class="btn btn-primary">Submit</button> -->
+							<!-- /.row (nested) -->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/documentCategory.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				DocumentCategory.Create.init();
+			});
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="utf-8"></meta>
+<title>Login</title>
+<link href="components/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+ <style type="text/css"> 
+/* body { */
+/* 	background: #064e95; */
+/* 	font-family: 'Roboto', sans-serif; */
+/* 	color: #666; */
+/* } */
+
+/* .margin_tp10 { */
+/* 	margin-top: 10px; */
+/* } */
+
+/* .center_div { */
+/* 	margin: 0 auto; */
+/* 	float: none; */
+/* } */
+
+/* .login_block { */
+/* 	background: #0c5ba9; */
+/* 	border: 1px solid #096ac9; */
+/* 	padding: 30px 20px 40px 20px; */
+/* 	color: #fff; */
+/* 	float: left; */
+/* 	width: 100%; */
+/* 	border-radius: 0px 0px 5px 5px; */
+/* 	-webkit-border-radius: 0px 0px 5px 5px; */
+/* 	-moz-border-radius: 0px 0px 5px 5px; */
+/* } */
+
+/* .login_logo { */
+/* 	background: #f5f5f5; */
+/* 	padding: 10px; */
+/* 	border-bottom: 5px solid #389e00; */
+/* 	text-align: center; */
+/* 	margin-top: 75px; */
+/* 	border-radius: 5px 5px 0px 0px; */
+/* 	-webkit-border-radius: 5px 5px 0px 0px; */
+/* 	-moz-border-radius: 5px 5px 0px 0px; */
+/* } */
+
+/* .login_block .title_label { */
+/* 	color: #fff; */
+/* } */
+
+/* .login_block h4 { */
+/* 	font-size: 25px; */
+/* 	font-weight: normal; */
+/* 	margin: 0 0 10px; */
+/* 	text-align: center; */
+/* } */
+
+/* .checkbox_con { */
+/* 	float: left; */
+/* 	width: 100%; */
+/* 	line-height: 36px; */
+/* } */
+
+/* .checkbox_con input[type="checkbox"] { */
+/* 	float: left; */
+/* 	width: auto; */
+/* 	margin: 10px 5px 0 0; */
+/* } */
+
+/* .login_bg { */
+/* 	background: url(images/login_BG.jpg) no-repeat center center fixed; */
+/* 	height: 100%; */
+/* 	float: left; */
+/* 	width: 100%; */
+/* 	position: absolute; */
+/* 	-webkit-background-size: cover; */
+/* 	-moz-background-size: cover; */
+/* 	-o-background-size: cover; */
+/* 	background-size: cover; */
+/* } */
+
+/* .forgot_link { */
+/* 	color: #fff; */
+/* } */
+
+/* .forgot_link:hover, .forgot_link:focus { */
+/* 	color: #80befb; */
+/* } */
+
+/* .custom_padding [class^="col-"]:first-child { */
+/* 	padding-left: 15px; */
+/* 	padding-right: 10px; */
+/* } */
+
+/* .title_label { */
+/* 	display: block; */
+/* 	color: #333; */
+/* 	padding: 5px 0; */
+/* } */
+
+/* .custom_error { */
+/* 	border: 1px solid #f73c3c; */
+/* 	color: #fff; */
+/* 	padding: 10px; */
+/* 	margin-bottom: 10px; */
+/* 	background: #ea0c0c; */
+/* 	border-radius: 3px; */
+/* 	-moz-border-radius: 3px; */
+/* 	-webkit-border-radius: 3px; */
+/* 	-o-border-radius: 3px; */
+/* } */
+/* } */
+ </style> 
+
+</head>
+<body>
+	<div class="login_bg">
+
+		<div class="container-fluid">
+			<div class="col-lg-4 col-md-5 col-sm-7 col-xs-12 center_div">
+
+				<div class="login_logo">
+					<img src="images/login_logo.jpg" />
+				</div>
+
+
+
+				<div class="login_block">
+					<div class="col-md-12">
+						<h4>Login</h4>
+					</div>
+
+					<form class="form col-md-12" method="post" name="f"
+						th:action="@{/login}">
+
+						<div class="col-md-12 col-sm-12 col-xs-12 ">
+							<div th:if="${param.error}" class="custom_error">Invalid
+								username and password.</div>
+							<div th:if="${param.logout}" class="custom_error">You have
+								been logged out.</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 ">
+							<div class="title_label">User Id</div>
+							<input class="form-control" type="text" placeholder="User Id"
+								name="username" />
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 ">
+							<div class="title_label">Password</div>
+							<input class="form-control" type="password"
+								placeholder="Password" name="password" />
+						</div>
+
+						<div class="col-md-12 margin_tp10">
+							<div class="checkbox_con">
+								<input type="checkbox" /> Remember me
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12 ">
+
+							<input type="submit" class="btn btn-success btn-block "
+								value="Login" />
+
+						</div>
+
+
+						<div class="col-md-12 col-sm-12 col-xs-12 margin_tp10">
+							<a class="forgot_link" href="#">Forgot your password?</a>
+							
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><BootStrap xmlns:xalan="http://xml.apache.org/xslt">
+   <Database>
+      <URL>jdbc:oracle:thin:@127.0.0.1:1521:agile9</URL>
+      <UserName>pubuser</UserName>
+      <Password>AE03FC88E5F0B0E21C93390FDF160591E8DEBDBD86F18C9E98201AA161273AA6E5B1AE03</Password>
+      <Driver>oracle.jdbc.OracleDriver</Driver>
+      <PublicGroupId>1</PublicGroupId>
+   </Database>
+   <CfgVersion>8.309</CfgVersion>
+   <Configurations>
+      <BRE name="Primavera P6 Configuration" instances="1" logDir="D:\temp\WebAccessLogs"/>
+   </Configurations>
+</BootStrap>

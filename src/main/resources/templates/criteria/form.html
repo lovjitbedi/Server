@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#form">Form</a></li>
+				<li><a data-toggle="tab" href="#whereused">Where Used</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="form" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="page-header">Criteria</h2>
+						</div>
+						<!-- /.col-md-12 -->
+					</div>
+					<!-- /.row -->
+
+					<div class="row">
+						<div class="col-md-12">
+							<form method="post" th:action="@{/criteria/save}"
+								th:object="${criteria}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Name<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{name}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Code<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{objectCode}"
+													required="required" pattern="^\S+$" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label class="control-label">Module Name<ins
+														class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<select th:field="*{moduleName}" required="required">
+													<option th:each="module : ${moduleList}"
+														th:value="${module?.getName()}"
+														th:text="${module?.getName()}">Module Name</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Description<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-md-8">
+												<textarea class="form-control" rows="3"
+													th:field="*{description}" required="required"></textarea>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<label>Query (In JSON)</label>
+<!-- 												<button type="button" id="btnQuery" class="btn btn-success"> -->
+<!-- 													<span class="glyphicon glyphicon-floppy-disk"></span> -->
+<!-- 													Create Query -->
+<!-- 												</button> -->
+											</div>
+											<div class="col-md-8">
+												<textarea class="form-control" id="txtArea" rows="8"
+													th:field="*{rawForm}" pattern="^\S+$"></textarea>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-success">
+										<span class="glyphicon glyphicon-floppy-disk"></span> Save
+									</button>
+									<!-- /.row (nested) -->
+								</div>
+							</form>
+							<!-- /.panel-body -->
+						</div>
+					</div>
+					<!-- /.panel -->
+					<!-- /.col-md-12 -->
+					<!-- /.row -->
+
+				</div>
+				<div id="whereused" class="tab-pane fade">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="page-header">WHERE USED</h2>
+						</div>
+						<!-- /.col-md-12 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-lg-12">
+							<button type="button" class="btn btn-success"
+								onclick="Criteria.List.editRedirect()">View</button>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="table-responsive">
+							<div id="privilegemask-list-table-container">
+								<table id="privilegemask-list-table"
+									class="my_table_1 table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>_id</th>
+											<th>Privilege Name</th>
+											<th>Object Code</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="privilegeMask : ${privilegeMaskList}">
+											<td th:text="${privilegeMask?.getId()}"></td>
+											<td th:text="${privilegeMask?.getName()}"></td>
+											<td th:text="${privilegeMask?.getObjectCode()}"></td>
+											<td th:text="${privilegeMask?.getDescription()}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="sub-activity-assignment-form"
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" style="width: 810px">
+				<div class="modal-content">
+					<div class="modal-header custom_modal_header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Criteria Creator</h4>
+					</div>
+					<div class="modal-body" style="height: 400px; overflow: auto">
+						<div class="row">
+							<div class="col-md-12 padding-top-children-20">
+								<div class="col-md-12">
+
+									<div class="col-md-1">
+										<label title="Modules" style="margin-top: 20%;">Module:</label>
+									</div>
+									<div class="col-md-4" style="margin-bottom: 5%;">
+										<select id="ddlModule" onchange="Criteria.Create.moduleList()"><option value="-1">Select A Module</option>
+											<option value="project">Project</option>
+											<option value="document">Document</option>
+											<option value="transmittal">Transmittal</option>
+											<option value="submittal">Submittal</option>
+											<option value="discussions">Discussions</option>
+										</select>
+									</div>
+									<hr/>
+<!-- 									<div class="col-md-2"> -->
+<!-- 										<label title="Contents" style="margin-top: 5%;"> -->
+<!-- 											Modules:</label> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-md-3"> -->
+<!-- 										<select id="ddlContents"></select> -->
+<!-- 									</div> -->
+								</div>
+								<div class="col-md-12" style="margin-bottom: 2%;">
+									<div class="col-md-1">(</div>
+									<div class="col-md-3">Attributes</div>
+									<div class="col-md-2">Operator</div>
+									<div class="col-md-2">Values</div>
+									<div class="col-md-1">)</div>
+									<div class="col-md-1">Join</div>
+								</div>
+								<div class="col-md-12 resource-assignment-row" style="margin-bottom: 2%;">
+									<div class="col-md-1">
+										<input type="radio" id = "rdbutton1" style="margin-top: 30%;" />
+									</div>
+									<div class="col-md-3">
+										<select id="ddlAttribute"><option value="-1">Attribute
+											</option></select>
+									</div>
+									<div class="col-md-2">
+										<select id = "ddlOperator"><option value="-1">Operator</option>
+										<option value="$in">In</option>
+										<option value="$nin">Not In</option>
+										<option value="$eq">Equals</option>
+										<option value="$nqe">Not Equals</option>
+										<option value="$gte">Greater Than</option>
+										<option value="-$lte">Less Than</option>
+										</select>
+									</div>
+									<div class="col-md-2" id = "dynamic">
+										<input type="text"  id ="txtValue"  style="margin-top: 5%; width: 80%" />
+									</div>
+									<div class="col-md-1">
+										<input type="radio"  id = "rdbutton2"  style="margin-top: 30%;" />
+									</div>
+									<!-- 									<div class="col-md-2"> -->
+									<!-- 										<input type="text" data-provide="datepicker" -->
+									<!-- 											data-date-format="dd-mm-yyyy" -->
+									<!-- 											class="sub-activity-date start-date" style="width: 85%" /> -->
+									<!-- 									</div> -->
+									<!-- 									<div class="col-md-2"> -->
+									<!-- 										<input type="text" data-provide="datepicker" -->
+									<!-- 											data-date-format="dd-mm-yyyy" -->
+									<!-- 											class="sub-activity-date finish-date" style="width: 85%" /> -->
+									<!-- 									</div> -->
+
+									<div class="col-md-1">
+										<select id="ddlJoin"><option value="-1">Join</option>
+										<option value="$and">And</option>
+										<option value="$or">Or</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<div class="col-md-6 add-resource-row">
+											<i class="fa fa-plus-circle fa-2x" style="color: #2ecc71"></i>
+										</div>
+										<div class="col-md-6 remove-resource-row">
+											<i class="fa fa-minus-circle fa-2x" style="color: #e74c3c"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-dismiss="modal" class="btn btn-default" onclick="Criteria.Create.createCriteriaJson()">Done</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/criteria.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				Criteria.Create.init();
+				Criteria.List.initPM();
+				Criteria.Create.bindAddAndRemoveRowEvent();
+			});
+		</script>
+	</div>
+</body>
+</html>

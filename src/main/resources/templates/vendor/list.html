@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+
+<body>
+<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="page-header">Vendor</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<a class="btn btn-primary" th:href="@{/vendor/create}"><span class="glyphicon glyphicon-plus"></span> Add</a>
+					
+					<button type="button" class="btn btn-warning"
+						onclick="Vendor.List.edit()"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+					<button type="button" class="btn btn-danger"
+						onclick="Vendor.List.remove()"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+						<div class="row">
+					<div class="table-responsive">
+						<div id="vendor-list-table-container">
+							<table id="vendor-list-table"
+							class="my_table_1 table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>_id</th>
+										<th>Name</th>
+										<th>Type</th>
+										<th>Code</th>
+										<th>Pan</th>
+										<th>SalesTaxNo</th>
+										<th>ServiceTaxNo</th>
+										<th>VatNo</th>
+										<th>Address</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="vendor : ${vendorList}">
+										<td th:text="${vendor?.getId()}"></td>
+										<td th:text="${vendor?.getName()}"></td>
+										<td th:text="${vendor?.getRecordType()}"></td>
+										<td th:text="${vendor?.getCode()}"></td>
+										<td th:text="${vendor?.getPan()}"></td>
+										<td th:text="${vendor?.getSalesTaxNo()}"></td>
+										<td th:text="${vendor?.getServiceTaxNo()}"></td>
+										<td th:text="${vendor?.getVatNo()}"></td>
+										<td th:text="${vendor?.getAddress()}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/vendor.js}"></script>
+		<script th:inline="javascript">
+			$(document).ready(
+					function() {
+						/*<![CDATA[*/
+						var msg = /*[[${message}]]*/null;
+						if (msg) {
+							SiteMAN.showNotification(msg,
+									SiteMAN.NotificationType.success);
+						}
+						/*]]>*/
+						Vendor.List.init();
+					});
+		</script>
+	</div>
+</body>
+</html>
+
+
+
+
+	
+
+			
+								
+								

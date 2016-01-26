@@ -1,0 +1,92 @@
+[{
+	"name": "Project",
+	"attributes":{
+			"_id":"Id",
+			"title":"Title",
+			"projectId":"ProjectID" ,
+			"priority": "Priority",
+			"objectId": "ObjectId",
+			"customer":"Customer",
+			"market":"Market" ,
+			"riskRating":"RiskRating" ,
+			"projectStatus":"ProjectStatus",
+			"projectType": "ProjectType",
+			"location":"Location",
+			"projectCategory": "ProjectCategory",
+			"portfolio": "Portfolio",
+			"objectCode":"objectCode",
+			"imported":"Imported" ,
+			"projectManager": "ProjectManager",
+			"createdBy":"CreatedBy",
+			"createdOn": "CreatedOn",
+			"folderTemplate":"folderTemplate"
+		}
+},{
+	"name": "Document",
+	"attributes":{
+        "_id" : "Id",
+        "objectType" : "ObjectType",
+        "objectCode" :"ObjectCode" ,
+        "title" :"Title" ,
+        "documentCategoryId" : "DocumentCategoryId",
+        "origin" : "Origin" ,
+        "dueBy" : "DueBy",
+        "documentOwner" :"DocumentOwner" ,
+        "company" : "Company",
+        "structure" : "Structure",
+        "disciplineDesignator" : "DisciplineDesignator" ,
+        "sheetTypeDesignator" : "SheetTypeDesignator",
+        "revisionNumber" :"RevisionNumber",
+        "plannedStartDate" :"PlannedStartDate" ,
+        "actualStartDate" : "ActualStartDate",
+        "statusDesignator" : "statusDesignator",
+        "statusDescription" : "StatusDescription",
+        "sheetSize" : "SheetSize",
+        "numberOfSheets" :  "NumberOfSheets",
+        "remarksRouteData" :"RemarksRouteData" ,
+        "externalSheetName" : "ExternalSheetName" ,
+        "isClientDrawingNumbering" :  "IsClientDrawingNumbering",
+        "documentStatus" : "DocumentStatus",
+        "parentFolderId" :"ParentFolderId",
+        "revision" :  "Revision",
+        "archivedRevision" : "ArchivedRevision",
+        "createdBy" :  "CreatedBy",
+        "createdOn" : "CreatedOn",
+        "projectIds" : "ProjectId"
+		}
+	},{
+	"name": "Transmittal",
+	"attributes":{
+	"_id": "Id",
+	"objectCode": "ObjectCode",
+	"title": "Title",
+	"responseRequired": "ResponseRequired",
+	"refProjectId": "RefProjectId",
+	"transmittalType": "TransmittalType",
+	"receivedFrom": "ReceivedFrom",
+	"sentTo": "SentTo",
+	"date": "Date",
+	"dueBy": "DueBy",
+	"createdOn": "CreatedOn",
+	"createdBy": "CreatedBy",
+	"attachments": "Attachments"
+}
+},{
+	"name": "Submittal",
+	"attributes":{
+	"_id": "Id",
+	"objectCode": "ObjectCode",
+	"title": "Title",
+	"receivedFrom": "ReceivedFrom",
+	"refProjectId": "RefProjectId",
+	"sentTo": "SentTo",
+	"date": "Date",
+	"createdBy": "CreatedBy",
+	"submittalType": "SubmittalType",
+	"createdOn": "CreatedOn",
+	"attachments": "Attachments",
+	"submittalStatus": "SubmittalStatus",
+	"revision": "Revision",
+	"archivedRevision": "ArchivedRevision"
+}
+}]

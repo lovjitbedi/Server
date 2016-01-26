@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout/base">
+<body>
+	<div layout:fragment="main-content">
+		<div id="page-wrapper">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#form">Form</a></li>
+				<!-- 				<li><a data-toggle="tab" href="#whereused">Where Used</a></li> -->
+			</ul>
+
+			<div class="tab-content">
+				<div id="form" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="page-header">User</h2>
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+					<!-- /.row -->
+
+					<div class="row">
+						<div class="col-lg-12">
+							<form method="post" th:action="@{/user/save}" th:object="${user}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Name<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control" th:field="*{name}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Email<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input type="email" class="form-control" th:field="*{email}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>UserId<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input class="form-control"
+													th:readonly="${user.getUserId()!=null}"
+													th:field="*{userId}" required="required" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Password<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input type="password" class="form-control" id="password"
+													name="password" th:value="${user.getPassword()}"
+													th:readonly="${user.getPassword()!=null}"
+													required="required" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label>Confirm Password<ins class="required-field">*</ins></label>
+											</div>
+											<div class="col-lg-8">
+												<input type="password" class="form-control"
+													th:value="${user.getPassword()}" id="confirmPassword"
+													required="required"
+													th:readonly="${user.getPassword()!=null}" />
+											</div>
+										</div>
+									</div>
+
+									<script language='javascript' type='text/javascript'>
+										var password = document
+												.getElementById("password");
+										var confirm_password = document
+												.getElementById("confirmPassword");
+										function validatePassword() {
+											if (password.value != confirm_password.value) {
+												confirm_password
+														.setCustomValidity("Passwords Don't Match");
+											} else {
+												confirm_password
+														.setCustomValidity('');
+											}
+										}
+										password.onchange = validatePassword;
+										confirm_password.onkeyup = validatePassword;
+									</script>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label class="control-label">Roles</label>
+											</div>
+											<div class="col-lg-8">
+												<select multiple="multiple" th:field="*{roles}">
+													<option th:each="role : ${roleList}"
+													
+														th:value="${role?.getId()}" th:text="${role?.getName()}">Role
+														Name</option>
+
+												</select>
+						
+													<button type="button" id="btnRole" class="btn btn-info">
+													<span class="glyphicon glyphicon-plus"></span> Create
+													Role
+												</button>
+													
+													
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label class="control-label">User Group</label>
+											</div>
+											<div class="col-lg-8">
+												<select multiple="multiple" th:field="*{userGroups}">
+													<option th:each="userGroup : ${userGroupList}"
+														th:value="${userGroup?.getId()}"
+														th:text="${userGroup?.getName()}">User Group Name</option>
+
+												</select> 
+
+												<button type="button" id="btnUserGroup" class="btn btn-info">
+													<span class="glyphicon glyphicon-plus"></span> Create
+													UserGroup
+												</button>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-4">
+												<label class="control-label">Resource</label>
+											</div>
+											<div class="col-lg-8">
+												<select  th:field="*{resourceId}">
+													<option value="">Select A Resource</option>
+													<option th:each="resource : ${resourceList}"
+														th:value="${resource?.getId()}"
+														th:text="${resource?.getTitle()}">Resources</option>
+
+												</select>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+									<!-- /.row (nested) -->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /.col-lg-12 -->
+				<div id="whereused" class="tab-pane fade">
+					<p>Where Used</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="script">
+		<script th:src="@{/scripts/siteman/user.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				User.Create.init();
+			});
+		</script>
+	</div>
+</body>
+</html>
