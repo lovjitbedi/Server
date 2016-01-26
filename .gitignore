@@ -1,5 +1,12 @@
-.idea
-hooks
-plugins
-platforms/MyApplication
-platforms/platforms.json
+target/*
+/src/main/resources/json/*
+/src/main/resources/static/components/jqx/*
+/src/main/groovy/com/effektif/*
+/src/main/java/com/effektif/*
+.settings
+.project
+.classpath
+/target/
+build/
+.gradle/
+/bin/
